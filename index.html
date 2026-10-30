@@ -1,206 +1,541 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Personal portfolio website for Vishal Jagdhane"
-    />
-    <title>Vishal Jagdhane | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a href="#home" class="brand">VJ</a>
-        <nav class="nav" id="site-nav">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Vishal Jagdhane — Full Stack Developer & AI Engineer. React.js, Next.js, Angular, Python, FastAPI, Machine Learning, LLMs, RAG & Agentic AI." />
+<meta name="author" content="Vishal Jagdhane" />
+<meta name="theme-color" content="#0b0a09" />
+<title>Vishal Jagdhane | Full Stack Developer &amp; AI Engineer</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88' font-family='system-ui' font-weight='700' fill='%23f59e0b'%3EV%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <div class="preloader__logo"><span>V</span><span>J</span></div>
+    <div class="preloader__name">VISHAL JAGDHANE</div>
+    <div class="preloader__bar"><i id="loadBar"></i></div>
+    <div class="preloader__pct" id="loadPct">0%</div>
+  </div>
+</div>
+
+<!-- ============ CURSOR ============ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ============ BACKGROUND ============ -->
+<canvas id="bgCanvas" class="bg-canvas"></canvas>
+<div class="bg-mesh" aria-hidden="true">
+  <span class="orb orb--1"></span>
+  <span class="orb orb--2"></span>
+  <span class="orb orb--3"></span>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="scroll-progress"><i id="scrollBar"></i></div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#home" class="brand" data-cursor="link">
+      <span class="brand__mark">VJ</span>
+      <span class="brand__text">Vishal<em>Jagdhane</em></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#home" class="nav__link is-active" data-text="Home"><span>Home</span></a>
+      <a href="#about" class="nav__link" data-text="About"><span>About</span></a>
+      <a href="#experience" class="nav__link" data-text="Experience"><span>Experience</span></a>
+      <a href="#skills" class="nav__link" data-text="Skills"><span>Skills</span></a>
+      <a href="#projects" class="nav__link" data-text="Projects"><span>Projects</span></a>
+      <a href="#education" class="nav__link" data-text="Education"><span>Education</span></a>
+      <a href="#contact" class="nav__link" data-text="Contact"><span>Contact</span></a>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" data-cursor="link">
+        <svg class="ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></svg>
+      </button>
+      <a href="#contact" class="btn btn--sm btn--primary hide-sm" data-cursor="link">Hire Me</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero section" id="home">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="hero__hello reveal"><span class="wave">&#128075;</span> Hello, I am</p>
+      <h1 class="hero__name reveal" data-split>Vishal Jagdhane</h1>
+      <h2 class="hero__role reveal">
+        <span class="typed" id="typed"></span><span class="caret"></span>
+      </h2>
+      <p class="hero__desc reveal">
+        Full Stack Developer with <strong>3+ years</strong> of experience building responsive,
+        scalable web applications — and engineering AI systems with LLMs, RAG and Agentic AI.
+      </p>
+
+      <div class="hero__tags reveal">
+        <span>React.js</span><span>Next.js</span><span>Angular</span><span>TypeScript</span>
+        <span>Python</span><span>FastAPI</span><span>LLMs</span><span>RAG</span><span>Agentic AI</span>
       </div>
+
+      <div class="hero__cta reveal">
+        <a href="#projects" class="btn btn--primary magnetic" data-cursor="link">
+          View My Work
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost magnetic" data-cursor="link">Let&#39;s Talk</a>
+      </div>
+
+      <ul class="hero__social reveal">
+        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" data-cursor="link"><svg viewBox="0 0 24 24" class="fill"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.1 8.75 22 11 22 14.1V21h-4v-6.1c0-1.5-.03-3.4-2.1-3.4-2.1 0-2.4 1.6-2.4 3.3V21h-4V9Z"/></svg></a></li>
+        <li><a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" data-cursor="link"><svg viewBox="0 0 24 24" class="fill"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a></li>
+        <li><a href="mailto:vishal.jagdhane72@gmail.com" aria-label="Email" data-cursor="link"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3V6Zm0 0 9 7 9-7"/></svg></a></li>
+        <li><a href="tel:+918983780269" aria-label="Phone" data-cursor="link"><svg viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 6 4Z"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="hero__visual reveal">
+      <div class="avatar">
+        <div class="avatar__ring"></div>
+        <div class="avatar__ring avatar__ring--2"></div>
+        <div class="avatar__glow"></div>
+        <img src="asset/image.png" alt="Vishal Jagdhane" />
+        <span class="avatar__badge"><i></i> Open to work</span>
+      </div>
+      <div class="float-chip float-chip--1"><b>&lt;/&gt;</b> React · Next</div>
+      <div class="float-chip float-chip--2"><b>AI</b> LLM · RAG</div>
+      <div class="float-chip float-chip--3"><b>{ }</b> Python · FastAPI</div>
+    </div>
+  </div>
+
+  <div class="hero__stats container">
+    <div class="stat reveal"><strong class="count" data-to="3" data-suffix="+">0</strong><span>Years Experience</span></div>
+    <div class="stat reveal"><strong class="count" data-to="12" data-suffix="+">0</strong><span>Projects Delivered</span></div>
+    <div class="stat reveal"><strong class="count" data-to="15" data-suffix="+">0</strong><span>Technologies</span></div>
+    <div class="stat reveal"><strong class="count" data-to="100" data-suffix="%">0</strong><span>Commitment</span></div>
+  </div>
+
+  <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span>Scroll</a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>React.js ✦ Next.js ✦ Angular ✦ JavaScript ✦ TypeScript ✦ Node.js ✦ Python ✦ FastAPI ✦ Machine Learning ✦ LLMs ✦ RAG ✦ Generative AI ✦ Agentic AI ✦ Neo4j ✦ Highcharts ✦ MongoDB ✦&nbsp;</span>
+    <span>React.js ✦ Next.js ✦ Angular ✦ JavaScript ✦ TypeScript ✦ Node.js ✦ Python ✦ FastAPI ✦ Machine Learning ✦ LLMs ✦ RAG ✦ Generative AI ✦ Agentic AI ✦ Neo4j ✦ Highcharts ✦ MongoDB ✦&nbsp;</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">01 — About</span>
+      <h2 class="sec-title">Professional <em>Summary</em></h2>
+      <p class="sec-sub">Who I am and what I bring to the table.</p>
     </header>
 
-    <main>
-      <section class="hero" id="home">
-        <div class="container hero-grid">
-          <div class="hero-content">
-            <p class="eyebrow">Hello, I'm</p>
-            <h1>Vishal Jagdhane</h1>
-            <h2>Frontend Developer & Designer</h2>
-            <p class="lead">
-              I create responsive, modern websites and digital experiences that make
-              brands look professional and feel easy to use. I enjoy turning ideas into
-              clean, user-friendly interfaces.
-            </p>
-            <div class="cta-group">
-              <a class="btn btn-primary" href="#projects">View Projects</a>
-              <a class="btn btn-secondary" href="#contact">Hire Me</a>
-            </div>
-            <ul class="mini-stats">
-              <li><strong>2+</strong><span>Years Experience</span></li>
-              <li><strong>12+</strong><span>Projects</span></li>
-              <li><strong>100%</strong><span>Passion</span></li>
-            </ul>
-          </div>
-
-          <div class="hero-card">
-            <div class="profile-box">
-              <div class="avatar">VJ</div>
-              <div>
-                <p class="card-label">Available for work</p>
-                <h3>Web Developer</h3>
-              </div>
-            </div>
-            <div class="info-list">
-              <div>
-                <span>Email</span>
-                <strong>vishal.jagdhane72@gmail.com</strong>
-              </div>
-              <div>
-                <span>Location</span>
-                <strong>Pune, India</strong>
-              </div>
-              <div>
-                <span>Focus</span>
-                <strong>UI/UX & Frontend</strong>
-              </div>
-            </div>
-          </div>
+    <div class="about__grid">
+      <article class="card card--glow reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 22V12M3 7l9 5 9-5"/></svg>
         </div>
-      </section>
-
-      <section class="about section" id="about">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">About Me</p>
-            <h2>Turning ideas into engaging digital experiences</h2>
-          </div>
-          <div class="about-grid">
-            <div class="about-text">
-              <p>
-                I'm a motivated frontend developer who likes building websites that are clean,
-                responsive, and easy to use. I enjoy working with modern tools to bring design
-                concepts to life in a functional and polished way.
-              </p>
-              <p>
-                My focus is on user-centered design, performance, and a smooth browsing experience.
-                Whether it's a portfolio, business website, or landing page, I aim to create work
-                that looks professional and helps people connect with the brand.
-              </p>
-            </div>
-            <div class="about-card">
-              <h3>What I do</h3>
-              <ul>
-                <li>Responsive Web Design</li>
-                <li>UI/UX Prototyping</li>
-                <li>Website Development</li>
-                <li>Frontend Optimization</li>
-              </ul>
-            </div>
-          </div>
+        <h3>Full Stack Developer <span class="dot">·</span> AI Engineer</h3>
+        <p>
+          Full Stack Developer with 3+ years of experience in building responsive and scalable web
+          applications using React.js, Next.js, Angular, JavaScript, TypeScript, Python, Node.js and FastAPI.
+          Focused on AI Engineering, with practical knowledge of Machine Learning, Large Language Models (LLMs),
+          Retrieval-Augmented Generation (RAG) and Agentic AI.
+        </p>
+        <p>
+          Experienced in frontend development, REST API integration, database connectivity and reusable UI
+          components, with hands-on project experience in AI-powered applications and data analysis.
+          Passionate about building intelligent applications by combining full-stack development expertise
+          with modern AI technologies.
+        </p>
+        <div class="about__chips">
+          <span>REST API Integration</span><span>Reusable UI Components</span>
+          <span>Data Visualization</span><span>Database Connectivity</span><span>AI-Powered Apps</span>
         </div>
-      </section>
+      </article>
 
-      <section class="skills section" id="skills">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Skills</p>
-            <h2>Tools and technologies I use</h2>
-          </div>
-          <div class="skills-grid">
-            <div class="skill-card">HTML5</div>
-            <div class="skill-card">CSS3</div>
-            <div class="skill-card">JavaScript</div>
-            <div class="skill-card">React</div>
-            <div class="skill-card">Git & GitHub</div>
-            <div class="skill-card">Responsive Design</div>
-            <div class="skill-card">Figma</div>
-            <div class="skill-card">Bootstrap</div>
-          </div>
+      <div class="about__side">
+        <div class="info-card reveal">
+          <h4><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg> Quick Info</h4>
+          <ul class="info-list">
+            <li><span>Name</span><b>Vishal Jagdhane</b></li>
+            <li><span>Role</span><b>Full Stack Dev | AI Engineer</b></li>
+            <li><span>Experience</span><b>3+ Years</b></li>
+            <li><span>Location</span><b>Pune, Maharashtra</b></li>
+            <li><span>Email</span><b><a href="mailto:vishal.jagdhane72@gmail.com">vishal.jagdhane72@gmail.com</a></b></li>
+            <li><span>Phone</span><b><a href="tel:+918983780269">+91 89837 80269</a></b></li>
+            <!-- <li><span>Freelance</span><b class="ok">Available</b></li> -->
+          </ul>
         </div>
-      </section>
 
-      <section class="projects section" id="projects">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Projects</p>
-            <h2>Selected work</h2>
-          </div>
-          <div class="project-grid">
-            <article class="project-card">
-              <div class="project-thumb thumb-one"></div>
-              <div class="project-content">
-                <h3>Business Landing Page</h3>
-                <p>
-                  A clean marketing website for a startup brand, designed to highlight services,
-                  showcase value, and encourage customer leads.
-                </p>
-                <span>HTML / CSS / JS</span>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <div class="project-thumb thumb-two"></div>
-              <div class="project-content">
-                <h3>Portfolio Website</h3>
-                <p>
-                  A personal portfolio built to present projects, experience, and skillset in a
-                  clean and professional format.
-                </p>
-                <span>Frontend Design</span>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <div class="project-thumb thumb-three"></div>
-              <div class="project-content">
-                <h3>Admin Dashboard</h3>
-                <p>
-                  A simple analytics dashboard with a clean layout for tracking key metrics and
-                  reports in a user-friendly interface.
-                </p>
-                <span>UI Layout</span>
-              </div>
-            </article>
-          </div>
+        <div class="info-card reveal">
+          <h4><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg> Languages</h4>
+          <ul class="lang-list">
+            <li><span>English</span><i class="lvl" style="--p:95%"></i><b>Fluent</b></li>
+            <li><span>Hindi</span><i class="lvl" style="--p:98%"></i><b>Fluent</b></li>
+            <li><span>Marathi</span><i class="lvl" style="--p:100%"></i><b>Fluent</b></li>
+          </ul>
         </div>
-      </section>
 
-      <section class="contact section" id="contact">
-        <div class="container contact-box">
-          <div>
-            <p class="eyebrow">Contact</p>
-            <h2>Let’s build something great together.</h2>
-          </div>
-          <a class="btn btn-primary" href="mailto:vishal.jagdhane72@gmail.com">Email Me</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-wrap">
-        <p>© <span id="year"></span> Vishal Jagdhane</p>
-        <div class="socials">
-          <a href="https://github.com/vishaljagdhane" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/vishal-jagdhane" target="_blank" rel="noreferrer">LinkedIn</a>
+        <div class="info-card reveal">
+          <h4><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> Address</h4>
+          <p class="addr">
+            Plot No. 39, Gali No. 2, Ranjangaon SP,<br/>
+            <span>Taluka:</span> Gangapur · <span>District:</span> Chhatrapati Sambhajinagar (Aurangabad),<br/>
+            Maharashtra, India
+          </p>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
-  </body>
+<!-- ============ EXPERIENCE ============ -->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">02 — Career</span>
+      <h2 class="sec-title">Work <em>Experience</em></h2>
+      <p class="sec-sub">3+ years of shipping products across web and AI.</p>
+    </header>
+
+    <div class="timeline">
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <h3>Associate Solution Engineer</h3>
+              <p class="tl-org">Aligned Automation Service Private Limited</p>
+              <p class="tl-role">Full Stack Development <span class="dot">|</span> AI Engineering</p>
+            </div>
+            <div class="tl-meta">
+              <span class="pill pill--live"><i></i> Jan 2024 — Present</span>
+              <span class="tl-loc">Pune</span>
+            </div>
+          </div>
+          <p class="tl-tech"><b>Technologies:</b> React.js, Next.js, Angular, JavaScript, TypeScript, Python, FastAPI, Node.js, REST APIs, SQL/NoSQL Databases, Machine Learning, LLMs, RAG, Generative AI, Agentic AI</p>
+          <ul class="tl-list">
+            <li>Develop and maintain client-side web applications using React.js, Next.js, Angular, JavaScript and TypeScript.</li>
+            <li>Build responsive user interfaces, reusable components, dashboards and data-driven applications.</li>
+            <li>Integrate REST APIs and connect frontend applications with backend services.</li>
+            <li>Work with Python, FastAPI and databases for full-stack application development.</li>
+            <li>Work on AI-powered application development using Python and modern AI technologies.</li>
+            <li>Apply knowledge of Machine Learning, LLMs, RAG, Generative AI and Agentic AI in practical projects.</li>
+            <li>Collaborate with client-side teams to understand requirements, troubleshoot issues and deliver software solutions.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <h3>Software Engineer</h3>
+              <p class="tl-org">Savera Auto Private Limited</p>
+              <p class="tl-role">Software Engineer</p>
+            </div>
+            <div class="tl-meta">
+              <span class="pill">May 2022 — Jan 2024</span>
+              <span class="tl-loc">Aurangabad</span>
+            </div>
+          </div>
+          <p class="tl-tech"><b>Technologies:</b> PHP, CodeIgniter, MySQL, Barcode Scanning</p>
+          <ul class="tl-list">
+            <li>Developed and maintained an integrated employee management and production tracking application using PHP and CodeIgniter.</li>
+            <li>Implemented barcode scanning functionality to validate scanned items against expected production data.</li>
+            <li>Identified incorrect barcode scans and supported accurate production data tracking.</li>
+            <li>Developed features to monitor daily production, completed quantities and pending production.</li>
+            <li>Supported daily production planning and progress monitoring through the application.</li>
+            <li>Integrated employee management and production tracking workflows into a centralized system.</li>
+            <li>Performed bug fixing, application maintenance, database operations and enhancements based on business requirements.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">03 — Toolkit</span>
+      <h2 class="sec-title">Technical <em>Skills</em></h2>
+      <p class="sec-sub">The stack I use to design, build and ship.</p>
+    </header>
+
+    <div class="skills__grid">
+      <div class="skills__col reveal">
+        <h3 class="skills__label"><i class="sq"></i> Frontend</h3>
+        <div class="skill" data-p="100"><div class="skill__top"><span>React.js</span><b>100%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="92"><div class="skill__top"><span>Next.js</span><b>92%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="100"><div class="skill__top"><span>Angular</span><b>100%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="85"><div class="skill__top"><span>JavaScript</span><b>85%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="80"><div class="skill__top"><span>TypeScript</span><b>80%</b></div><div class="bar"><i></i></div></div>
+      </div>
+
+      <div class="skills__col reveal">
+        <h3 class="skills__label"><i class="sq"></i> Backend &amp; Data</h3>
+        <div class="skill" data-p="80"><div class="skill__top"><span>Python</span><b>80%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="90"><div class="skill__top"><span>Node.js</span><b>90%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="90"><div class="skill__top"><span>FastAPI</span><b>90%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="80"><div class="skill__top"><span>MySQL / PostgreSQL / MongoDB</span><b>80%</b></div><div class="bar"><i></i></div></div>
+      </div>
+
+      <div class="skills__col reveal">
+        <h3 class="skills__label"><i class="sq"></i> AI Engineering</h3>
+        <div class="skill" data-p="80"><div class="skill__top"><span>Machine Learning</span><b>80%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="80"><div class="skill__top"><span>Generative AI &amp; LLMs</span><b>80%</b></div><div class="bar"><i></i></div></div>
+        <div class="skill" data-p="80"><div class="skill__top"><span>RAG &amp; Agentic AI</span><b>80%</b></div><div class="bar"><i></i></div></div>
+      </div>
+    </div>
+
+    <div class="soft reveal">
+      <h3 class="skills__label"><i class="sq"></i> Soft Skills</h3>
+      <div class="soft__chips">
+        <span data-cursor="link">Problem Solving</span>
+        <span data-cursor="link">Team Collaboration</span>
+        <span data-cursor="link">Client Handling</span>
+        <span data-cursor="link">Communication</span>
+        <span data-cursor="link">Analytical Thinking</span>
+        <span data-cursor="link">Adaptability</span>
+        <span data-cursor="link">Time Management</span>
+        <span data-cursor="link">Continuous Learning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section section--alt" id="projects">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">04 — Work</span>
+      <h2 class="sec-title">Featured <em>Projects</em></h2>
+      <p class="sec-sub">Selected client and internal projects.</p>
+    </header>
+
+    <div class="filters reveal">
+      <button class="filter is-active" data-filter="all" data-cursor="link">All</button>
+      <button class="filter" data-filter="client" data-cursor="link">Client</button>
+      <button class="filter" data-filter="ai" data-cursor="link">AI</button>
+      <button class="filter" data-filter="ui" data-cursor="link">UI / Frontend</button>
+    </div>
+
+    <div class="projects" id="projectsGrid">
+      <article class="proj reveal" data-cat="client ui" data-tilt>
+        <div class="proj__num">01</div>
+        <div class="proj__art">
+          <svg viewBox="0 0 160 90" class="art-svg">
+            <g class="bars">
+              <rect x="12" y="52" width="14" height="30" rx="3"/>
+              <rect x="34" y="38" width="14" height="44" rx="3"/>
+              <rect x="56" y="22" width="14" height="60" rx="3"/>
+              <rect x="78" y="44" width="14" height="38" rx="3"/>
+            </g>
+            <circle class="donut-bg" cx="124" cy="46" r="22"/>
+            <circle class="donut" cx="124" cy="46" r="22"/>
+            <polyline class="spark" points="10,74 32,58 54,64 76,36 98,44 120,20 148,30"/>
+          </svg>
+        </div>
+        <div class="proj__body">
+          <span class="proj__type">Client Project</span>
+          <h3>Custom Dashboard &amp; Data Visualization</h3>
+          <p>Built customized dashboards with interactive charts, circular visualizations and large-volume data displays. Implemented reusable chart components and dynamic data visualization to present complex information clearly.</p>
+          <div class="proj__tags"><span>React.js</span><span>Next.js</span><span>Angular</span><span>Highcharts</span></div>
+        </div>
+        <div class="proj__shine"></div>
+      </article>
+
+      <article class="proj reveal" data-cat="client ai" data-tilt>
+        <div class="proj__num">02</div>
+        <div class="proj__art">
+          <svg viewBox="0 0 160 90" class="art-svg">
+            <g class="edges">
+              <line x1="80" y1="45" x2="34" y2="22"/><line x1="80" y1="45" x2="126" y2="24"/>
+              <line x1="80" y1="45" x2="30" y2="68"/><line x1="80" y1="45" x2="122" y2="70"/>
+              <line x1="34" y1="22" x2="30" y2="68"/><line x1="126" y1="24" x2="122" y2="70"/>
+            </g>
+            <g class="nodes">
+              <circle cx="80" cy="45" r="11"/><circle cx="34" cy="22" r="7"/>
+              <circle cx="126" cy="24" r="7"/><circle cx="30" cy="68" r="7"/><circle cx="122" cy="70" r="7"/>
+            </g>
+          </svg>
+        </div>
+        <div class="proj__body">
+          <span class="proj__type">Client Project</span>
+          <h3>AI Chatbot &amp; Knowledge Graph Visualization</h3>
+          <p>Developed a customized chatbot with graph-based node visualization, data cleaning and clarification workflows, returning relevant query responses. Integrated knowledge graph visualization to represent relationships between data entities.</p>
+          <div class="proj__tags"><span>Next.js</span><span>Python</span><span>FastAPI</span><span>Neo4j</span><span>LLMs</span></div>
+        </div>
+        <div class="proj__shine"></div>
+      </article>
+
+      <article class="proj reveal" data-cat="ui" data-tilt>
+        <div class="proj__num">03</div>
+        <div class="proj__art">
+          <svg viewBox="0 0 160 90" class="art-svg">
+            <rect class="ui-box" x="14" y="16" width="60" height="12" rx="6"/>
+            <rect class="ui-box" x="14" y="36" width="88" height="12" rx="6"/>
+            <rect class="ui-box" x="14" y="56" width="44" height="12" rx="6"/>
+            <rect class="ui-btn" x="100" y="54" width="46" height="18" rx="9"/>
+            <circle class="ui-dot" cx="138" cy="22" r="8"/>
+          </svg>
+        </div>
+        <div class="proj__body">
+          <span class="proj__type">Internal / Development</span>
+          <h3>Custom UI Component Framework</h3>
+          <p>Built reusable and customizable UI components — including text fields and form controls — to standardize design and accelerate delivery across multiple applications.</p>
+          <div class="proj__tags"><span>React.js</span><span>TypeScript</span><span>MUI</span><span>HTML</span><span>CSS</span></div>
+        </div>
+        <div class="proj__shine"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section" id="education">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">05 — Academics</span>
+      <h2 class="sec-title"><em>Education</em></h2>
+      <p class="sec-sub">Academic background and qualifications.</p>
+    </header>
+
+    <div class="edu__grid">
+      <article class="edu reveal">
+        <div class="edu__year">2017 — 2021</div>
+        <h3>Master of Computer Applications (MCA)</h3>
+        <p>Department of Management Science, Dr. Babasaheb Ambedkar Marathwada University (BAMU)</p>
+        <div class="edu__foot"><span class="edu__loc">Aurangabad</span><span class="grade grade--a">Grade A</span></div>
+      </article>
+      <article class="edu reveal">
+        <div class="edu__year">2014 — 2017</div>
+        <h3>Bachelor of Computer Science (BCS)</h3>
+        <p>Deogiri College, Dr. Babasaheb Ambedkar Marathwada University (BAMU)</p>
+        <div class="edu__foot"><span class="edu__loc">Aurangabad</span><span class="grade">60%</span></div>
+      </article>
+      <article class="edu reveal">
+        <div class="edu__year">2010 — 2012</div>
+        <h3>Higher Secondary Certificate (HSC — 12th)</h3>
+        <p>Deogiri College, Aurangabad Board</p>
+        <div class="edu__foot"><span class="edu__loc">Aurangabad</span><span class="grade">58%</span></div>
+      </article>
+      <article class="edu reveal">
+        <div class="edu__year">2012</div>
+        <h3>Secondary School Certificate (SSC — 10th)</h3>
+        <p>Trimurti High School, Aurangabad Board</p>
+        <div class="edu__foot"><span class="edu__loc">Aurangabad</span><span class="grade">48%</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <header class="sec-head reveal">
+      <span class="sec-kicker">06 — Contact</span>
+      <h2 class="sec-title">Let&#39;s Build <em>Something</em></h2>
+      <p class="sec-sub">Have a project or a role in mind? I would love to hear about it.</p>
+    </header>
+
+    <div class="contact__grid">
+      <div class="contact__side">
+        <a class="ct-card reveal" href="mailto:vishal.jagdhane72@gmail.com" data-cursor="link">
+          <span class="ct-ico"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3V6Zm0 0 9 7 9-7"/></svg></span>
+          <div><b>Email</b><p>vishal.jagdhane72@gmail.com</p></div>
+        </a>
+        <a class="ct-card reveal" href="tel:+918983780269" data-cursor="link">
+          <span class="ct-ico"><svg viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 6 4Z"/></svg></span>
+          <div><b>Phone</b><p>+91 89837 80269</p></div>
+        </a>
+        <div class="ct-card reveal">
+          <span class="ct-ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><b>Location</b><p>Pune, Maharashtra, India</p></div>
+        </div>
+        <div class="ct-card ct-card--sign reveal">
+          <span class="ct-ico"><svg viewBox="0 0 24 24"><path d="M3 18s3-9 6-9 2 7 4.5 7S17 6 21 6"/></svg></span>
+          <div><b>Signature</b><p class="sign">Vishal Jagdhane</p></div>
+        </div>
+      </div>
+
+      <form class="form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <input type="text" id="cName" name="name" placeholder=" " required />
+          <label for="cName">Your Name</label>
+          <small></small>
+        </div>
+        <div class="field">
+          <input type="email" id="cEmail" name="email" placeholder=" " required />
+          <label for="cEmail">Email Address</label>
+          <small></small>
+        </div>
+        <div class="field">
+          <input type="text" id="cSubject" name="subject" placeholder=" " required />
+          <label for="cSubject">Subject</label>
+          <small></small>
+        </div>
+        <div class="field">
+          <textarea id="cMsg" name="message" rows="5" placeholder=" " required></textarea>
+          <label for="cMsg">Your Message</label>
+          <small></small>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block magnetic" data-cursor="link">
+          Send Message
+          <svg viewBox="0 0 24 24"><path d="M3 11.5 21 3l-8.5 18-2.3-7.2L3 11.5Z"/></svg>
+        </button>
+        <p class="form__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#home" class="brand" data-cursor="link">
+      <span class="brand__mark">VJ</span>
+      <span class="brand__text">Vishal<em>.dev</em></span>
+    </a>
+    <p class="footer__copy">© <span id="year"></span> Vishal Jagdhane — Full Stack Developer &amp; AI Engineer.</p>
+    <ul class="footer__links">
+      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" data-cursor="link">LinkedIn</a></li>
+      <li><a href="https://github.com/" target="_blank" rel="noopener" data-cursor="link">GitHub</a></li>
+      <li><a href="mailto:vishal.jagdhane72@gmail.com" data-cursor="link">Email</a></li>
+    </ul>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top" data-cursor="link">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
 </html>
